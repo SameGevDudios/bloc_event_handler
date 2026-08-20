@@ -51,6 +51,7 @@ import 'bloc_error_mapper.dart';
 ///   // overriding the global errorStateConfig.
 ///   overrideError: (error, stack) {
 ///     if (error is CustomSilentException) return const ExampleState$SilentError();
+
 ///     return null;
 ///   });
 /// }
@@ -80,6 +81,7 @@ mixin BlocErrorHandler<Event, State> on Bloc<Event, State> {
         final customState = overrideError(error, stackTrace);
         if (customState != null) {
           emit(customState);
+
           return;
         }
       }
@@ -129,6 +131,7 @@ mixin BlocErrorHandler<Event, State> on Bloc<Event, State> {
     if (data is Map<String, dynamic>) {
       return data['message'] as String? ?? data['error'] as String? ?? data['detail'] as String?;
     }
+    
     return null;
   }
 }
